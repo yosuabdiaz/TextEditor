@@ -1,0 +1,49 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package text_editor;
+
+import java.io.File;
+import java.util.Scanner;
+import javax.swing.JFileChooser;
+import javax.swing.JTextPane;
+
+/**
+ *
+ * @author Yosua Blanco Diaz
+ */
+public class OpenCommand extends Command {
+
+    public OpenCommand(JTextPane Pane) {
+        super(Pane);
+    }
+    @Override
+    public void execute(){
+        System.out.println("I'm open");
+        try {
+            JFileChooser chooser = new JFileChooser();
+            chooser.setDialogTitle("Abrir archivo:");
+            chooser.showOpenDialog(null);
+            File myFile = chooser.getSelectedFile();
+            if(!myFile.exists()){
+                //Error 
+                return;
+            }
+            
+            Scanner myReader = new Scanner(myFile);
+            String text = "";
+            
+            while(myReader.hasNextLine()){
+                
+                text += myReader.nextLine()+"\n";
+            }
+            myReader.close();
+            this.myPane.setText(text);
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+}
