@@ -33,7 +33,7 @@ public class ColorCommand extends Command{
             doc.setCharacterAttributes(myPane.getSelectionStart(),
                     myPane.getSelectionEnd() - myPane.getSelectionStart(),
                     myPane.getStyle("miEstilo"),
-                    true);
+                true);
         } catch (Exception ex) {
         }
     }

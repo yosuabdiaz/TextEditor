@@ -5,6 +5,13 @@
  */
 package text_editor;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+import javax.swing.event.UndoableEditEvent;
+import javax.swing.event.UndoableEditListener;
+import javax.swing.text.BadLocationException;
 import javax.swing.text.Style;
 import javax.swing.text.StyledDocument;
 
@@ -19,6 +26,7 @@ public class Interface extends javax.swing.JFrame {
      */
     public Interface() {
         initComponents();
+        this.originator = new Originator(JTextPane.getStyledDocument());
     }
 
     /**
@@ -157,6 +165,11 @@ public class Interface extends javax.swing.JFrame {
             }
         });
 
+        JTextPane.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                JTextPaneKeyTyped(evt);
+            }
+        });
         jScrollPane1.setViewportView(JTextPane);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -260,12 +273,12 @@ public class Interface extends javax.swing.JFrame {
     }//GEN-LAST:event_colorButtonMouseClicked
 
     private void undoButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_undoButtonMouseClicked
-        Command myCommand = new UndoCommand(this.JTextPane);
+        Command myCommand = new UndoCommand(this.JTextPane, originator);
         myCommand.execute();
     }//GEN-LAST:event_undoButtonMouseClicked
 
     private void redoButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_redoButtonMouseClicked
-        Command myCommand = new RedoCommand(this.JTextPane);
+        Command myCommand = new RedoCommand(this.JTextPane, originator);
         myCommand.execute();
     }//GEN-LAST:event_redoButtonMouseClicked
 
@@ -289,6 +302,10 @@ public class Interface extends javax.swing.JFrame {
     private void colorButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_colorButtonActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_colorButtonActionPerformed
+
+    private void JTextPaneKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JTextPaneKeyTyped
+        
+    }//GEN-LAST:event_JTextPaneKeyTyped
 
     /**
      * @param args the command line arguments
@@ -324,9 +341,13 @@ public class Interface extends javax.swing.JFrame {
             }
         });
     }
+    
     StyledDocument doc;
     Style estilo;
     String Text="";
+    Originator originator;
+    
+   
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextPane JTextPane;
     private javax.swing.JButton colorButton;
@@ -341,4 +362,6 @@ public class Interface extends javax.swing.JFrame {
     private javax.swing.JButton saveButton;
     private javax.swing.JButton undoButton;
     // End of variables declaration//GEN-END:variables
+
+    
 }

@@ -5,21 +5,32 @@
  */
 package text_editor;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JTextPane;
+import javax.swing.text.BadLocationException;
 
 /**
  *
  * @author Yosua Blanco Diaz
  */
 public class UndoCommand extends Command{
-
-    public UndoCommand(JTextPane Pane) {
+    Originator originator;
+    public UndoCommand(JTextPane Pane, Originator originator) {
         super(Pane);
+        this.originator = originator;
     }
     @Override
     public void execute(){
         System.out.println("I'm undo");
         
+        Memento memento = originator.careTaker.getPreviousState();
+        originator.setMemento(memento);
+        
+        /*myPane.getStyledDocument().removeDocumentListener(Interface.TextEditorListener);
+        myPane.setText(memento.state.getText());
+        myPane.addStyle(memento.state.getText(), memento.state.getStyle());
+        myPane. =.(Interface.TextEditorListener);*/
     }
 }
 

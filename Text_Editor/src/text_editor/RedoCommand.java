@@ -12,13 +12,15 @@ import javax.swing.JTextPane;
  * @author Yosua Blanco Diaz
  */
 public class RedoCommand extends Command{
-
-    public RedoCommand(JTextPane Pane) {
+    Originator originator;
+    public RedoCommand(JTextPane Pane, Originator originator) {
         super(Pane);
+        this.originator = originator;
     }
     @Override
     public void execute(){
-        System.out.println("I'm redo");
+         Memento memento = originator.careTaker.getNextState();
+        originator.setMemento(memento);
         
     }
 }
