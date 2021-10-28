@@ -5,6 +5,8 @@
  */
 package text_editor;
 
+import java.util.ArrayList;
+import javax.swing.text.AttributeSet;
 import javax.swing.text.Style;
 
 /**
@@ -13,9 +15,9 @@ import javax.swing.text.Style;
  */
 public class DocumentState {
     private String text;
-    private Style style;
+    ArrayList<AttributeSet> style;
 
-    public DocumentState(String text, Style style) {
+    public DocumentState(String text, ArrayList<AttributeSet> style) {
         this.text = text;
         this.style = style;
     }
@@ -24,7 +26,7 @@ public class DocumentState {
         return text;
     }
 
-    public Style getStyle() {
+    public  ArrayList<AttributeSet> getStyle() {
         return style;
     }
     

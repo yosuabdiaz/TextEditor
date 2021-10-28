@@ -35,13 +35,13 @@ public class CareTaker {
     }
     
     Memento getPreviousState(){
-        System.out.println(currentIndex);
-        if(currentIndex -1 < 0){
+        
+        if(currentIndex -2 < 0){
             return null;
         }
         currentIndex--;
-        System.out.println(currentIndex);
-        return memento.get(currentIndex);
+        System.out.println(currentIndex -1);
+        return memento.get(currentIndex -1);
     }
     
 }
