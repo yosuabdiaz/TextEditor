@@ -9,11 +9,16 @@ package text_editor;
  *
  * @author Yosua Blanco Diaz
  */
-public class FileFactory implements IFactory {
+public class FileFactory {
+    public static IFile getFile(docType typeDocument) {
+        switch (typeDocument) {
+            case CSV : return new CSV();
+            case JSON : return new JSON();
+            case TXT : return new TXT();
+            case XML : return new XML();
+            default : return new TXT();
+        }
 
-    @Override
-    public IFile factoyMethod(docType typeDocument) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

@@ -19,29 +19,51 @@ public class OpenCommand extends Command {
     public OpenCommand(JTextPane Pane) {
         super(Pane);
     }
+
     @Override
-    public void execute(){
+    public void execute() {
         System.out.println("I'm open");
         try {
             JFileChooser chooser = new JFileChooser();
             chooser.setDialogTitle("Abrir archivo:");
             chooser.showOpenDialog(null);
             File myFile = chooser.getSelectedFile();
-            if(!myFile.exists()){
+            if (!myFile.exists()) {
                 //Error 
                 return;
             }
-            
-            Scanner myReader = new Scanner(myFile);
-            String text = "";
-            
-            while(myReader.hasNextLine()){
-                
-                text += myReader.nextLine()+"\n";
+
+            String myFileName = myFile.getName();
+            String extention = "";
+            int index = myFileName.lastIndexOf('.');
+            if (index > 0) {
+                extention = myFileName.substring(index + 1);
             }
-            myReader.close();
-            this.myPane.setText(text);
-            
+            //System.out.println(extention);
+            IFile myNewFile = null; 
+            switch(extention){
+                case "csv": myNewFile = FileFactory.getFile(docType.CSV);
+                break;
+                case "xml": myNewFile = FileFactory.getFile(docType.XML);
+                break;
+                case "json": myNewFile = FileFactory.getFile(docType.JSON);
+                break;
+                case "txt": myNewFile = FileFactory.getFile(docType.TXT);
+                break;
+                default: myNewFile = FileFactory.getFile(docType.TXT);
+            }
+            myNewFile.loadFile();
+//
+//            Scanner myReader = new Scanner(myFile);
+//            String text = "";
+//
+//            while (myReader.hasNextLine()) {
+//
+//                text += myReader.nextLine() + "\n";
+//            }
+//            myReader.close();
+//            this.myPane.setText(text);
+
         } catch (Exception e) {
             e.printStackTrace();
         }
