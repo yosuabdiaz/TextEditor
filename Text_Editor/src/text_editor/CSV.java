@@ -16,7 +16,12 @@ public class CSV implements IFile{
 
     @Override
     public StyledDocument loadFile(File path) {
+        //leer el texto del csv texto sin ; = text
+        //leer los numero = colores[];
+        //getStyledDocument(texto, colores );
+        //return StyledDocument; 
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
     }
 
     @Override

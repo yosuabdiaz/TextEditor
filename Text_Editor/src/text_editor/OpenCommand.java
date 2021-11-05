@@ -42,9 +42,7 @@ public class OpenCommand extends Command {
             //System.out.println(extention);
             IFile myNewFile; 
             switch(extention){
-                case "csv": 
-                    myNewFile = FileFactory.getFile(docType.CSV);
-                    
+                case "csv": myNewFile = FileFactory.getFile(docType.CSV);
                 break;
                 case "xml": myNewFile = FileFactory.getFile(docType.XML);
                 break;
@@ -54,16 +52,11 @@ public class OpenCommand extends Command {
                 break;
                 default: myNewFile = FileFactory.getFile(docType.TXT);
             }
-            //myNewFile.loadFile();
-//
-//            Scanner myReader = new Scanner(myFile);
-//            String text = "";
-//
-//            while (myReader.hasNextLine()) {
-//
-//                text += myReader.nextLine() + "\n";
-//            }
-//            myReader.close();
+            //carga el estilo que viene de los archivos 
+            //y lo guarda en el comando para actualizar 
+            //interface.
+            setDoc(myNewFile.loadFile(myFile));
+
             this.myPane.setText(extention);
             setName(myFileName);
         } catch (Exception e) {
