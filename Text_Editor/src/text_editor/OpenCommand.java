@@ -29,7 +29,7 @@ public class OpenCommand extends Command {
             chooser.showOpenDialog(null);
             File myFile = chooser.getSelectedFile();
             if (!myFile.exists()) {
-                //Error 
+                System.out.println("Error con el archivo"); 
                 return;
             }
 
@@ -39,7 +39,6 @@ public class OpenCommand extends Command {
             if (index > 0) {
                 extention = myFileName.substring(index + 1);
             }
-            //System.out.println(extention);
             IFile myNewFile; 
             switch(extention){
                 case "csv": myNewFile = FileFactory.getFile(docType.CSV);
@@ -52,12 +51,9 @@ public class OpenCommand extends Command {
                 break;
                 default: myNewFile = FileFactory.getFile(docType.TXT);
             }
-            //carga el estilo que viene de los archivos 
-            //y lo guarda en el comando para actualizar 
-            //interface.
             setDoc(myNewFile.loadFile(myFile));
-
-            this.myPane.setText(extention);
+            //this.myPane.setStyledDocument(doc);
+            this.myPane.setText(myFileName);
             setName(myFileName);
         } catch (Exception e) {
             e.printStackTrace();
