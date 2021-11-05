@@ -13,12 +13,12 @@ public class CSV implements IFile{
 
     @Override
     public void loadFile() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        System.out.println("me cargo como csv");
     }
 
     @Override
     public void saveFile() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        System.out.println("me guardo como csv");
     }
     
 }

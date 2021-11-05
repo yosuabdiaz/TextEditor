@@ -18,6 +18,7 @@ abstract class Command {
     protected StyledDocument doc;
     protected Style style;
     protected String text = "";
+    protected String name = "";
     Command(JTextPane Pane){
         myPane = Pane;
     }
@@ -27,6 +28,14 @@ abstract class Command {
         this.doc = doc;
         this.style = style;
     }
+    
+    Command(JTextPane Pane,StyledDocument doc,Style style,String name ){
+        myPane = Pane;
+        this.doc = doc;
+        this.style = style;
+        this.name = name;
+    }
+    
     
     abstract void execute();
      public JTextPane getPanel() {
@@ -59,5 +68,13 @@ abstract class Command {
     
     public String getText(){
         return text;
+    }
+
+    public String getName() {
+        return name; 
+    }
+    
+    public void setName(String name){
+        this.name = name;
     }
 }

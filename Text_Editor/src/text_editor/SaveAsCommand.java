@@ -6,6 +6,8 @@
 package text_editor;
 
 import javax.swing.JTextPane;
+import javax.swing.text.Style;
+import javax.swing.text.StyledDocument;
 
 /**
  *
@@ -13,11 +15,12 @@ import javax.swing.JTextPane;
  */
 public class SaveAsCommand extends Command{
 
-    public SaveAsCommand(JTextPane Pane) {
-        super(Pane);
+    public SaveAsCommand(JTextPane Pane, StyledDocument doc, Style style, String name) {
+        super(Pane, doc, style, name );
     }
     @Override
     public void execute(){
         System.out.println("I'm save as ");
+        
     }
 }

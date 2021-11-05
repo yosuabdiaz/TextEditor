@@ -9,16 +9,6 @@ package text_editor;
  *
  * @author Yosua Blanco Diaz
  */
-public class TXT implements IFile{
-
-    @Override
-    public void loadFile() {
-        System.out.println("me cargo como txt");
-    }
-
-    @Override
-    public void saveFile() {
-       System.out.println("me guardo como txt");
-    }
+public class StyleData {
     
 }

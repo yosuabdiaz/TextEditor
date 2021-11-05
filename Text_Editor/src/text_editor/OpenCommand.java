@@ -40,9 +40,11 @@ public class OpenCommand extends Command {
                 extention = myFileName.substring(index + 1);
             }
             //System.out.println(extention);
-            IFile myNewFile = null; 
+            IFile myNewFile; 
             switch(extention){
-                case "csv": myNewFile = FileFactory.getFile(docType.CSV);
+                case "csv": 
+                    myNewFile = FileFactory.getFile(docType.CSV);
+                    
                 break;
                 case "xml": myNewFile = FileFactory.getFile(docType.XML);
                 break;
@@ -62,8 +64,8 @@ public class OpenCommand extends Command {
 //                text += myReader.nextLine() + "\n";
 //            }
 //            myReader.close();
-//            this.myPane.setText(text);
-
+            this.myPane.setText(extention);
+            setName(myFileName);
         } catch (Exception e) {
             e.printStackTrace();
         }
