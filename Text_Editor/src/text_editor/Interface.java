@@ -250,7 +250,7 @@ public class Interface extends javax.swing.JFrame {
     }//GEN-LAST:event_openButtonMouseClicked
 
     private void saveButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_saveButtonMouseClicked
-        Command myCommand = new SaveCommand(this.JTextPane, doc, estilo, name);
+        Command myCommand = new SaveCommand(this.JTextPane, JTextPane.getStyledDocument(), estilo, name);
         myCommand.execute();
     }//GEN-LAST:event_saveButtonMouseClicked
 

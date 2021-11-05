@@ -5,6 +5,8 @@
  */
 package text_editor;
 
+import javax.swing.text.StyledDocument;
+
 /**
  *
  * @author Yosua Blanco Diaz
@@ -12,13 +14,13 @@ package text_editor;
 public class JSON implements IFile{
 
     @Override
-    public void loadFile() {
-        System.out.println("me cargo como json");
+    public void loadFile(String path) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
     @Override
-    public void saveFile() {
-        System.out.println("me guardo como json");
+    public void saveFile(String path, StyledDocument doc) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

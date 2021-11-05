@@ -31,9 +31,10 @@ public class SaveCommand extends Command {
     @Override
     public void execute() {
         System.out.println("I'm save");
+        IFile file = FileFactory.getFile(docType.XML);
+        file.saveFile("", doc);
         
-        
-        JFileChooser jfc = new JFileChooser();
+        /*JFileChooser jfc = new JFileChooser();
         FileNameExtensionFilter filtro = new FileNameExtensionFilter("text", "txt");
         jfc.setFileFilter(filtro);
         int seleccion = jfc.showSaveDialog(null);
@@ -71,6 +72,6 @@ public class SaveCommand extends Command {
             bw.close();
             fw.close();
         } catch (IOException ex) {
-        }
+        }*/
     }
 }

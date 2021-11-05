@@ -5,11 +5,13 @@
  */
 package text_editor;
 
+import javax.swing.text.StyledDocument;
+
 /**
  *
  * @author Yosua Blanco Diaz
  */
 interface IFile {
-    void loadFile();
-    void saveFile();
+    void loadFile(String path);
+    void saveFile(String path, StyledDocument doc);
 }

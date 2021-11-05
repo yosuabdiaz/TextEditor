@@ -54,7 +54,7 @@ public class OpenCommand extends Command {
                 break;
                 default: myNewFile = FileFactory.getFile(docType.TXT);
             }
-            myNewFile.loadFile();
+            //myNewFile.loadFile();
 //
 //            Scanner myReader = new Scanner(myFile);
 //            String text = "";

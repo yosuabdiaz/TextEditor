@@ -5,20 +5,23 @@
  */
 package text_editor;
 
+import javax.swing.text.StyledDocument;
+
 /**
  *
  * @author Yosua Blanco Diaz
  */
 public class CSV implements IFile{
 
+
     @Override
-    public void loadFile() {
-        System.out.println("me cargo como csv");
+    public void loadFile(String path) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void saveFile() {
-        System.out.println("me guardo como csv");
+    public void saveFile(String path, StyledDocument doc) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }
