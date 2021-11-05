@@ -5,6 +5,7 @@
  */
 package text_editor;
 
+import java.io.File;
 import javax.swing.text.StyledDocument;
 
 /**
@@ -12,6 +13,6 @@ import javax.swing.text.StyledDocument;
  * @author Yosua Blanco Diaz
  */
 interface IFile {
-    void loadFile(String path);
-    void saveFile(String path, StyledDocument doc);
+    StyledDocument loadFile(File path);
+    void saveFile(File path, String text, int[] colors);
 }

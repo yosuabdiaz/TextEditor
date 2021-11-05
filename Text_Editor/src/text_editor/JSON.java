@@ -5,6 +5,7 @@
  */
 package text_editor;
 
+import java.io.File;
 import javax.swing.text.StyledDocument;
 
 /**
@@ -14,13 +15,14 @@ import javax.swing.text.StyledDocument;
 public class JSON implements IFile{
 
     @Override
-    public void loadFile(String path) {
+    public StyledDocument loadFile(File path) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void saveFile(String path, StyledDocument doc) {
+    public void saveFile(File path, String text, int[] colors) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
+   
 }

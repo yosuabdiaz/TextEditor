@@ -245,6 +245,7 @@ public class Interface extends javax.swing.JFrame {
 
     private void openButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_openButtonMouseClicked
         Command myCommand = new OpenCommand(this.JTextPane);
+        originator = new Originator(JTextPane.getStyledDocument());
         myCommand.execute();
         name = myCommand.getName();
     }//GEN-LAST:event_openButtonMouseClicked
