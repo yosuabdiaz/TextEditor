@@ -52,8 +52,7 @@ public class OpenCommand extends Command {
                 default: myNewFile = FileFactory.getFile(docType.TXT);
             }
             setDoc(myNewFile.loadFile(myFile));
-            //this.myPane.setStyledDocument(doc);
-            this.myPane.setText(chooser.getDescription(chooser.getSelectedFile()));
+            this.myPane.setStyledDocument(getDoc());// aqui se cargaria el estilo al pane
             setName(chooser.getDescription(chooser.getSelectedFile()));
         } catch (Exception e) {
             e.printStackTrace();

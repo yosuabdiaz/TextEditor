@@ -40,9 +40,16 @@ public class TXT implements IFile{
     @Override
     public void saveFile(File path, String text, int[] colors) {
         text = text + "\n\nColors:";
-        
-        for(int i=0; i<colors.length;i++){
-            text = text +colors[i] + "," ; 
+        // datos de prueba
+        int[] testNumbers = new int[5];
+        testNumbers[0] = 1;
+        testNumbers[1] = 2;
+        testNumbers[2] = 3;
+        testNumbers[3] = 4;
+        testNumbers[4] = 5;
+        //----------------------
+        for(int i=0; i<testNumbers.length;i++){
+            text = text +testNumbers[i] + "," ; 
         }
             
         message = SaveInfo(path,text);

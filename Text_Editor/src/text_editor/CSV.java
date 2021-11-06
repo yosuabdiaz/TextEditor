@@ -77,17 +77,8 @@ public class CSV implements IFile {
 
         }
         System.out.println("El formato es correcto");
-        // datos de prueba
-        int[] testNumbers = new int[5];
-        testNumbers[0] = 1;
-        testNumbers[1] = 2;
-        testNumbers[2] = 3;
-        testNumbers[3] = 4;
-        testNumbers[4] = 5;
-        //----------------------
-        //armo el String de los numeros con los estilos
         String estilo="";
-        for(int number : testNumbers){
+        for(int number : colors){
             if(estilo.equals("")){
                 estilo += valueOf(number);
             }else{
