@@ -11,6 +11,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
+import javax.swing.text.DefaultStyledDocument;
+import javax.swing.text.SimpleAttributeSet;
+import javax.swing.text.StyleConstants;
 import javax.swing.text.StyledDocument;
 
 /**
@@ -44,11 +47,24 @@ public class StyledDocumentManager {
             colors[i] = colorNumber;
             
         }
-    return null;
+        return colors;
    }
    
    static public StyledDocument getStyledDocument(String text, int[] colors){
-       return null;
+        StyledDocument doc = new DefaultStyledDocument();
+        SimpleAttributeSet s = new SimpleAttributeSet();
+        try {
+           doc.insertString(0, text, s);
+        } catch (BadLocationException ex) {
+           Logger.getLogger(StyledDocumentManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        for(int i = 0; i < colors.length; i++){
+           Color c = new Color(colors[i]);
+           s.addAttribute(StyleConstants.Background, c);
+           doc.setCharacterAttributes(i, 1, s, true);
+        }
+       
+       return doc;
    }
     
 }
