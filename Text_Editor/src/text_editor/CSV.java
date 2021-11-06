@@ -10,6 +10,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.PrintWriter;
+import static java.lang.String.valueOf;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -54,10 +56,9 @@ public class CSV implements IFile {
         }
         int[] colorsFile = new int[text.length()];
         int index = 0;
-        System.out.println(text);
         for (int n : colorsNumber) {
             colorsFile[index] = n;
-            System.out.print(colorsFile[index]+",");
+            //System.out.print(colorsFile[index]+",");
             index++;
         }
         StyledDocument x = StyledDocumentManager.getStyledDocument(text, colorsFile);
@@ -70,17 +71,44 @@ public class CSV implements IFile {
         for (int i=0; i < text.length(); i++){
             char c = text.charAt(i);
             if(c == ';'){
-                
-                System.out.println(c);
                 System.out.println("El formato no es correcto, contiene ;");
                 return;
             }
-        }
-        for(int i=0; i < text.length(); i++){
-            
-        }
-        System.out.println(text);
 
+        }
+        System.out.println("El formato es correcto");
+        // datos de prueba
+        int[] testNumbers = new int[5];
+        testNumbers[0] = 1;
+        testNumbers[1] = 2;
+        testNumbers[2] = 3;
+        testNumbers[3] = 4;
+        testNumbers[4] = 5;
+        //----------------------
+        //armo el String de los numeros con los estilos
+        String estilo="";
+        for(int number : testNumbers){
+            if(estilo.equals("")){
+                estilo += valueOf(number);
+            }else{
+                estilo += ";"+valueOf(number);
+            }
+        }
+        
+        // ------- end
+        //----Formo el texto en el formato adecuado para escribir
+        String myText = text.replace(' ',';');
+        String myText2 = myText.replace('\n',';');
+        // create FileWriter object with file as parameter
+        PrintWriter pw = null;
+        try {   
+            pw = new PrintWriter(path);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        pw.write(myText2+"\n");
+        pw.write(estilo);
+        pw.close();
     }
 
 }

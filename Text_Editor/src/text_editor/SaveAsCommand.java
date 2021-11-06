@@ -27,34 +27,26 @@ public class SaveAsCommand extends Command {
 
     @Override
     public void execute() {
-        System.out.println("I'm save as ");
         File myFile = null;
-        if (getName().equals("")) {
-            //select name and save
-            JFileChooser chooser = new JFileChooser();
-            chooser.setDialogTitle("Guardar archivo:");
-            int retrival = chooser.showSaveDialog(null);
-            if (retrival == JFileChooser.APPROVE_OPTION) {
-                try {
-                    myFile = chooser.getSelectedFile();
-                    setName(chooser.getDescription(chooser.getSelectedFile()));
-                    //System.out.println(chooser.getDescription(chooser.getSelectedFile()));
-                    
-                } catch (Exception ex) {
-                    ex.printStackTrace();
-                }
+        JFileChooser chooser = new JFileChooser();
+        chooser.setDialogTitle("Guardar archivo:");
+        int retrival = chooser.showSaveDialog(null);
+        if (retrival == JFileChooser.APPROVE_OPTION) {
+            try {
+                myFile = chooser.getSelectedFile();
+                setName(myFile.getPath());//guarda el nombre en el comando 
+            } catch (Exception ex) {
+                ex.printStackTrace();
             }
-        } else {
-            myFile = new File(getName()); 
         }
-        
+        //------Saca la extencio del archivo para llama en el factory
         String myFileName = myFile.getName();
         String extention = "";
         int index = myFileName.lastIndexOf('.');
         if (index > 0) {
             extention = myFileName.substring(index + 1);
         }
-        System.out.println(extention);
+        //------- end
         IFile myNewFile;
         switch (extention) {
             case "csv":
@@ -70,12 +62,11 @@ public class SaveAsCommand extends Command {
                 myNewFile = FileFactory.getFile(docType.TXT);
                 break;
             default:
-                myNewFile = FileFactory.getFile(docType.TXT);
+                System.out.println("."+extention+" no soportada.");
+                return;
         }
-        try {
-            System.out.println(myFile);
-            System.out.println(getDoc());
-            myNewFile.saveFile(myFile, getDoc().getText(0,doc.getLength()), StyledDocumentManager.getBackgroundColors(getDoc()) );
+        try {//llama al metodo guardar segun la instancia del factory
+            myNewFile.saveFile(myFile, getDoc().getText(0, doc.getLength()), StyledDocumentManager.getBackgroundColors(getDoc()));
         } catch (BadLocationException ex) {
             Logger.getLogger(SaveAsCommand.class.getName()).log(Level.SEVERE, null, ex);
         }
