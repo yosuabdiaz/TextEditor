@@ -6,17 +6,14 @@
 package text_editor;
 
 import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectOutputStream;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import javax.swing.JTextPane;
-import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.Style;
 import javax.swing.text.StyledDocument;
+import utils.StyledDocumentManager;
 
 /**
  *
@@ -31,47 +28,54 @@ public class SaveCommand extends Command {
     @Override
     public void execute() {
         System.out.println("I'm save");
-        IFile file = FileFactory.getFile(docType.XML);
-        //file.saveFile("", doc);
-        
-        /*JFileChooser jfc = new JFileChooser();
-        FileNameExtensionFilter filtro = new FileNameExtensionFilter("text", "txt");
-        jfc.setFileFilter(filtro);
-        int seleccion = jfc.showSaveDialog(null);
-
-        FileOutputStream fw = null;
-        ObjectOutputStream bw = null;
-        if (seleccion == JFileChooser.APPROVE_OPTION) {
-            try {
-                System.out.println(jfc.getName());
-                
-                  File fichero = null;
-                  
-                if (jfc.getFileFilter().getDescription().equals("text")) {
-                    fichero = new File(jfc.getSelectedFile().getPath() + ".omf");
-                } else {
-                    fichero = jfc.getSelectedFile();
+        File myFile = null;
+        if (getName().equals("")) { //si el archivo no tiene nombre
+            JFileChooser chooser = new JFileChooser();
+            chooser.setDialogTitle("Guardar archivo:");
+            int retrival = chooser.showSaveDialog(null);
+            if (retrival == JFileChooser.APPROVE_OPTION) {
+                try {
+                    myFile = chooser.getSelectedFile();
+                    
+                } catch (Exception ex) {
+                    ex.printStackTrace();
                 }
-                System.out.println(fichero.getName());
-//
-//                fw = new FileOutputStream(fichero);
-//                bw = new ObjectOutputStream(fw);
-//                Documento d = new Documento(tp_texto, doc, estilo);
-//                bw.writeObject(d);
-//                bw.flush();
-//
-//                JOptionPane.showMessageDialog(this,
-//                        "Archivo guardado exitosamente");
-//
-            } catch (Exception e) {
-                e.printStackTrace();
             }
+        } else {//si el archivo si tiene nombre 
+            myFile = new File(getName()); //toma el nombre de archivo que tiene el command seteado
+        }
 
-        }//fin IF
-        try {
-            bw.close();
-            fw.close();
-        } catch (IOException ex) {
-        }*/
+        setName(myFile.getPath());
+        //------Saca la extencio del archivo para llama en el factory
+        String myFileName = myFile.getName();
+        String extention = "";
+        int index = myFileName.lastIndexOf('.');
+        if (index > 0) {
+            extention = myFileName.substring(index + 1);
+        }
+        //------- end
+        IFile myNewFile;
+        switch (extention) {
+            case "csv":
+                myNewFile = FileFactory.getFile(docType.CSV);
+                break;
+            case "xml":
+                myNewFile = FileFactory.getFile(docType.XML);
+                break;
+            case "json":
+                myNewFile = FileFactory.getFile(docType.JSON);
+                break;
+            case "txt":
+                myNewFile = FileFactory.getFile(docType.TXT);
+                break;
+            default:
+                System.out.println("."+extention+" no soportada.");
+                return;
+        }
+        try {//llama al metodo guardar segun la instancia del factory
+            myNewFile.saveFile(myFile, getDoc().getText(0,doc.getLength()), StyledDocumentManager.getBackgroundColors(getDoc()) );
+        } catch (BadLocationException ex) {
+            Logger.getLogger(SaveAsCommand.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

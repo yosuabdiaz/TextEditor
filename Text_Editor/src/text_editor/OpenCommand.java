@@ -29,7 +29,7 @@ public class OpenCommand extends Command {
             chooser.showOpenDialog(null);
             File myFile = chooser.getSelectedFile();
             if (!myFile.exists()) {
-                //Error 
+                System.out.println("Error con el archivo"); 
                 return;
             }
 
@@ -39,12 +39,9 @@ public class OpenCommand extends Command {
             if (index > 0) {
                 extention = myFileName.substring(index + 1);
             }
-            //System.out.println(extention);
             IFile myNewFile; 
             switch(extention){
-                case "csv": 
-                    myNewFile = FileFactory.getFile(docType.CSV);
-                    
+                case "csv": myNewFile = FileFactory.getFile(docType.CSV);
                 break;
                 case "xml": myNewFile = FileFactory.getFile(docType.XML);
                 break;
@@ -54,18 +51,10 @@ public class OpenCommand extends Command {
                 break;
                 default: myNewFile = FileFactory.getFile(docType.TXT);
             }
-            //myNewFile.loadFile();
-//
-//            Scanner myReader = new Scanner(myFile);
-//            String text = "";
-//
-//            while (myReader.hasNextLine()) {
-//
-//                text += myReader.nextLine() + "\n";
-//            }
-//            myReader.close();
-            this.myPane.setText(extention);
-            setName(myFileName);
+            setDoc(myNewFile.loadFile(myFile));
+            //this.myPane.setStyledDocument(doc);
+            this.myPane.setText(chooser.getDescription(chooser.getSelectedFile()));
+            setName(chooser.getDescription(chooser.getSelectedFile()));
         } catch (Exception e) {
             e.printStackTrace();
         }
