@@ -36,12 +36,17 @@ public class StyledDocumentManager {
             AttributeSet chatacterAtributes = doc.getCharacterElement(i).getAttributes();
             Enumeration<?> atributes = chatacterAtributes.getAttributeNames();
             System.out.println("Char: " + text.charAt(i));
-            int colorNumber = 0;
+            int colorNumber = -1;
             while(atributes.hasMoreElements()){
                 Object s = chatacterAtributes.getAttribute(atributes.nextElement());
                 if(s.getClass() == Color.class){
                     Color color = (Color)s;
-                    colorNumber = color.getRGB();
+                    if (color.getRGB() == 0){
+                        colorNumber = -1;
+                    }else{
+                        colorNumber = color.getRGB();
+                    }
+                    
                 }
             }
             colors[i] = colorNumber;
