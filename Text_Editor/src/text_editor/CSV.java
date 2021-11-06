@@ -66,7 +66,21 @@ public class CSV implements IFile {
 
     @Override
     public void saveFile(File path, String text, int[] colors) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        //valida que no tenga ; el texto del editor.
+        for (int i=0; i < text.length(); i++){
+            char c = text.charAt(i);
+            if(c == ';'){
+                
+                System.out.println(c);
+                System.out.println("El formato no es correcto, contiene ;");
+                return;
+            }
+        }
+        for(int i=0; i < text.length(); i++){
+            
+        }
+        System.out.println(text);
+
     }
 
 }

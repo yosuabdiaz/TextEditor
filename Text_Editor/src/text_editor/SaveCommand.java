@@ -5,7 +5,10 @@
  */
 package text_editor;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JTextPane;
+import javax.swing.text.BadLocationException;
 import javax.swing.text.Style;
 import javax.swing.text.StyledDocument;
 
@@ -24,7 +27,13 @@ public class SaveCommand extends Command {
         System.out.println("I'm save");
         
         IFile file = FileFactory.getFile(docType.XML);
-        //file.saveFile("", doc);
+        System.out.println(getName());
+        try {
+            System.out.println(doc.getText(0, doc.getLength()));
+            //file.saveFile("", doc);
+        } catch (BadLocationException ex) {
+            Logger.getLogger(SaveCommand.class.getName()).log(Level.SEVERE, null, ex);
+        }
       
     }
 }

@@ -16,7 +16,7 @@ public class Interface extends javax.swing.JFrame {
     //JTextPane : campo de texto
     /**
      * Creates new form Interface
-     */
+     */ 
     public Interface() {
         initComponents();
         this.originator = new Originator(JTextPane.getStyledDocument());
@@ -257,7 +257,7 @@ public class Interface extends javax.swing.JFrame {
     }//GEN-LAST:event_saveButtonMouseClicked
 
     private void sameAsButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sameAsButtonMouseClicked
-        Command myCommand = new SaveAsCommand(this.JTextPane, doc, estilo, name);
+        Command myCommand = new SaveAsCommand(this.JTextPane, JTextPane.getStyledDocument(), estilo, name);
         myCommand.execute();
     }//GEN-LAST:event_sameAsButtonMouseClicked
 

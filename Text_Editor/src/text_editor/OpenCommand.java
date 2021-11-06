@@ -53,8 +53,8 @@ public class OpenCommand extends Command {
             }
             setDoc(myNewFile.loadFile(myFile));
             //this.myPane.setStyledDocument(doc);
-            this.myPane.setText(myFileName);
-            setName(myFileName);
+            this.myPane.setText(chooser.getDescription(chooser.getSelectedFile()));
+            setName(chooser.getDescription(chooser.getSelectedFile()));
         } catch (Exception e) {
             e.printStackTrace();
         }
