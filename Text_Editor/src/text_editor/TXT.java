@@ -6,21 +6,58 @@
 package text_editor;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import javax.swing.text.StyledDocument;
+import utils.StyledDocumentManager;
 
 /**
  *
- * @author Yosua Blanco Diaz - Mariana Bustos V.
+ * @author Mariana Bustos V.
  */
 public class TXT implements IFile{
 
     FileOutputStream OutF;
+    FileInputStream InputF;
     String message;
     
+    public String OpenFile(File path){
+        String doc="";
+        try{
+            InputF = new FileInputStream(path);
+            int ascci;
+            while ((ascci = InputF.read())!=-1){
+                char caracter = (char)ascci;
+                doc += caracter;
+            }
+        }catch (Exception e){
+            
+        }
+        return doc;
+    }
+    
     @Override
-    public StyledDocument loadFile(File path) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public StyledDocument loadFile(File path) {   
+        String text = "";
+        message = OpenFile(path);
+          
+        String[] textmesage = message.split("\nColors:");
+               
+        text = textmesage[0];               
+        textmesage = textmesage[1].split(",");
+        int[] colors = new int[text.length()];
+        
+        for (int i = 0; i<textmesage.length; i++) {
+            int myNumber = Integer.parseInt(textmesage[i]);
+            colors[i] = myNumber;
+        }
+        
+        for (int i = 0; i<textmesage.length; i++) {
+            System.out.println(colors);
+        }
+        
+        StyledDocument x = StyledDocumentManager.getStyledDocument(text, colors);
+        return x;
     }
 
         public String SaveInfo(File path, String text){
@@ -40,16 +77,9 @@ public class TXT implements IFile{
     @Override
     public void saveFile(File path, String text, int[] colors) {
         text = text + "\n\nColors:";
-        // datos de prueba
-        int[] testNumbers = new int[5];
-        testNumbers[0] = 1;
-        testNumbers[1] = 2;
-        testNumbers[2] = 3;
-        testNumbers[3] = 4;
-        testNumbers[4] = 5;
-        //----------------------
-        for(int i=0; i<testNumbers.length;i++){
-            text = text +testNumbers[i] + "," ; 
+        
+        for(int i=0; i<colors.length;i++){
+            text = text +colors[i] + "," ; 
         }
             
         message = SaveInfo(path,text);
