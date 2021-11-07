@@ -74,14 +74,25 @@ public class JSON implements IFile{
             String[] textmesage = message.split("\nColors:");
                
             text = textmesage[0];               
+            System.out.println("Text: \n"+text + "\n");
+            System.out.println("textmesage[1]: \n"+textmesage[1] + "\n");
+            
             textmesage = textmesage[1].split(",");
+            System.out.println("Prueba ----------------- \n");
+            
+            System.out.println("textmesage[1]: \n"+textmesage + "\n");
+            
             int[] colors = new int[text.length()];
 
             for (int i = 0; i<textmesage.length; i++) {
                 int myNumber = Integer.parseInt(textmesage[i]);
                 colors[i] = myNumber;
-                
             }
+
+            for (int i = 0; i<textmesage.length; i++) {
+                System.out.println(colors);
+            }
+
             StyledDocument x = StyledDocumentManager.getStyledDocument(text, colors);
             return x;
             
