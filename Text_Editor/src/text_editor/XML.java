@@ -13,6 +13,18 @@ import java.util.logging.Logger;
 import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.StyledDocument;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.OutputKeys;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
+import org.w3c.dom.Attr;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import utils.StyledDocumentManager;
 
 /**
  *
@@ -22,49 +34,69 @@ public class XML implements IFile{
 
     @Override
     public StyledDocument loadFile(File path) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+      
+        try {
+            // parse XML file to build DOM
+            DocumentBuilder builder = DocumentBuilderFactory.newInstance()
+                    .newDocumentBuilder();
+            Document dom = builder.parse(path);
+
+            // normalize XML structure
+            dom.normalizeDocument();
+
+            // get root element
+            Element root = dom.getDocumentElement();
+
+           
+
+            // print elements
+            String text = root.getElementsByTagName("text").item(0).getTextContent();
+            String colorData = root.getElementsByTagName("color").item(0).getTextContent();
+            String[] colorDataList = colorData.split(",");
+            int[] colors = new int[colorDataList.length];
+            for(int i = 0; i < colorDataList.length; i++){
+                colors[i] = Integer.parseInt(colorDataList[i]);
+            }
+            return StyledDocumentManager.getStyledDocument(text, colors);
+           
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return null;
     }
 
     @Override
     public void saveFile(File path, String text, int[] colors) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    /*@Override
-    public void saveFile(String path, StyledDocument doc) {
-        String text = "";
-        System.out.println(doc);
         try {
-            text = doc.getText(0, doc.getLength());
-        } catch (BadLocationException ex) {
+            //crea el documento
+            DocumentBuilder builder = DocumentBuilderFactory.newInstance()
+                    .newDocumentBuilder();
+            Document dom = builder.newDocument();
+            Element root = dom.createElement("document");
+            dom.appendChild(root);
+            //Crea la etiqueta con el texto
+            Element textData = dom.createElement("text");
+            textData.setTextContent(text);
+            
+            String colorText = "";
+            for(int i = 0; i < colors.length; i++){
+                colorText += colors[i];
+                if(i < (colors.length - 1)){ colorText += ","; }
+            }
+            //Crea la etiqueta con el color
+            Element colorData = dom.createElement("color");
+            colorData.setTextContent(colorText);
+            root.appendChild(textData);
+            root.appendChild(colorData);
+            //Parsea el elemento dom en xml y lo escribe
+            Transformer tr = TransformerFactory.newInstance().newTransformer();
+            tr.setOutputProperty(OutputKeys.INDENT, "yes");
+            tr.transform(new DOMSource(dom), new StreamResult(path));
+            //tr.transform(new DOMSource(dom), new StreamResult(System.out));
+        } catch (Exception ex) {
             Logger.getLogger(XML.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        for(int i = 0; i< text.length(); i++){
-            AttributeSet chatacterAtributes = doc.getCharacterElement(i).getAttributes();
-            Enumeration<?> atributes = chatacterAtributes.getAttributeNames();
-            System.out.println("Char: " + text.charAt(i));
-            int c = 0;
-            while(atributes.hasMoreElements()){
-                Object s = chatacterAtributes.getAttribute(atributes.nextElement());
-                if(s.getClass() == Color.class){
-                    Color color = (Color)s;
-                    c = color.getRGB();
-                  
-                    Color color2 = new Color(0);
-                    //System.out.println(color2);
-                }
-                //System.out.println(chatacterAtributes.getAttribute(atributes.nextElement()).getClass());
-                //System.out.println(atributes.nextElement().toString());
-            }
-            System.out.println("Color: " + c);
-        }*/
-
-  
-
-    /*@Override
-    public void saveFile(String path, String text, int[] colors) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }*/
     
+    }
 }
