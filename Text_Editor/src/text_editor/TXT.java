@@ -16,14 +16,13 @@ import utils.StyledDocumentManager;
  * @author Mariana Bustos V.
  */
 public class TXT implements IFile{
-
-    FileOutputStream OutF;
-    FileInputStream InputF;
-    String message;
-    
-    public String OpenFile(File path){
+    @Override
+    public StyledDocument loadFile(File path) {   
+        String text = "";
+        String message;
         String doc="";
         try{
+            FileInputStream InputF;
             InputF = new FileInputStream(path);
             int ascci;
             while ((ascci = InputF.read())!=-1){
@@ -33,13 +32,7 @@ public class TXT implements IFile{
         }catch (Exception e){
             
         }
-        return doc;
-    }
-    
-    @Override
-    public StyledDocument loadFile(File path) {   
-        String text = "";
-        message = OpenFile(path);
+        message = doc;
           
         String[] textmesage = message.split("\nColors:");
                
@@ -55,20 +48,6 @@ public class TXT implements IFile{
         StyledDocument x = StyledDocumentManager.getStyledDocument(text, colors);
         return x;
     }
-
-        public String SaveInfo(File path, String text){
-        String mensaje = null;
-        try{
-            OutF = new FileOutputStream(path);
-            byte[] bytxt = text.getBytes();
-            OutF.write(bytxt);
-            mensaje = "Archivo Guardado";
-                        
-        }catch (Exception e){
-            
-        }
-        return mensaje;
-    }
     
     @Override
     public void saveFile(File path, String text, int[] colors) {
@@ -77,8 +56,19 @@ public class TXT implements IFile{
         for(int i=0; i<colors.length;i++){
             text = text +colors[i] + "," ; 
         }
+        String message;  
+        String mensaje = null;
+        try{
+            FileOutputStream OutF;
+            OutF = new FileOutputStream(path);
+            byte[] bytxt = text.getBytes();
+            OutF.write(bytxt);
+            mensaje = "Archivo Guardado";
+                        
+        }catch (Exception e){
             
-        message = SaveInfo(path,text);
+        }
+        message = mensaje;
     }
     
 }
