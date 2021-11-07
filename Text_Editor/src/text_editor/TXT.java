@@ -43,8 +43,10 @@ public class TXT implements IFile{
           
         String[] textmesage = message.split("\nColors:");
                
-        text = textmesage[0];               
+        text = textmesage[1];
+        System.out.println(textmesage[0]);
         textmesage = textmesage[1].split(",");
+        
         int[] colors = new int[text.length()];
         
         for (int i = 0; i<textmesage.length; i++) {
