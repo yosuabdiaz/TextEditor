@@ -36,7 +36,7 @@ public class JSON implements IFile{
     public String OpenFile(File path) throws FileNotFoundException, IOException, ParseException{
         String doc="";
         JSONParser parser = new JSONParser();
-        System.out.println(doc);        
+        System.out.println("OpenFile"+doc);        
         try{
             Object obj = parser.parse(new FileReader(path));
             JSONObject jsonObject = (JSONObject) obj;
@@ -69,20 +69,18 @@ public class JSON implements IFile{
         try {
             
             message = OpenFile(path);
-            
+            System.out.println(message);
                       
-            String[] textmesage = message.split("\nColors:");
+            String[] textmesage = message.split("\nColor:");
             
-            System.out.println(textmesage[0]);
+            for (String x : textmesage){
+                System.out.println(x);
+            }
             
-            text = textmesage[0];               
-            System.out.println("Text: \n"+text + "\n");
-            System.out.println("textmesage[1]: \n"+textmesage[1] + "\n");
+            text = textmesage[0];
             
             textmesage = textmesage[1].split(",");
-            System.out.println("Prueba ----------------- \n");
             
-            System.out.println("textmesage[1]: \n"+textmesage + "\n");
             
             int[] colors = new int[text.length()];
 
