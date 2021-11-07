@@ -53,6 +53,7 @@ public class JSON implements IFile{
             doc = doc + "\nColor:";
             for(int i = 0 ; i < col.size() ; i++) {
                 doc = doc + col.get(i);
+                doc = doc + ",";
             }          
             System.out.println(doc);
         }catch (Exception e){
