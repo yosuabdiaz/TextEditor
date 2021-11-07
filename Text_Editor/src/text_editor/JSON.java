@@ -54,7 +54,7 @@ public class JSON implements IFile{
             for(int i = 0 ; i < col.size() ; i++) {
                 doc = doc + col.get(i);
             }          
-            System.out.println(doc);
+            //System.out.println(doc);
         }catch (Exception e){
             
         }
@@ -69,9 +69,11 @@ public class JSON implements IFile{
             
             message = OpenFile(path);
             
-                        
+                      
             String[] textmesage = message.split("\nColors:");
-               
+            
+            System.out.println(textmesage[0]);
+            
             text = textmesage[0];               
             textmesage = textmesage[1].split(",");
             int[] colors = new int[text.length()];
