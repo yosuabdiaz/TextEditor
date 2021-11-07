@@ -245,8 +245,8 @@ public class Interface extends javax.swing.JFrame {
 
     private void openButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_openButtonMouseClicked
         Command myCommand = new OpenCommand(this.JTextPane);
-        originator = new Originator(JTextPane.getStyledDocument());
         myCommand.execute();
+        originator = new Originator(JTextPane.getStyledDocument());
         name = myCommand.getName();
         doc = myCommand.getDoc();
     }//GEN-LAST:event_openButtonMouseClicked
@@ -254,12 +254,14 @@ public class Interface extends javax.swing.JFrame {
     private void saveButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_saveButtonMouseClicked
         Command myCommand = new SaveCommand(this.JTextPane, JTextPane.getStyledDocument(), estilo, name);
         myCommand.execute();
+        originator = new Originator(JTextPane.getStyledDocument());
         name = myCommand.getName();
     }//GEN-LAST:event_saveButtonMouseClicked
 
     private void sameAsButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sameAsButtonMouseClicked
         Command myCommand = new SaveAsCommand(this.JTextPane, JTextPane.getStyledDocument(), estilo, name);
         myCommand.execute();
+        originator = new Originator(JTextPane.getStyledDocument());
         name = myCommand.getName();
     }//GEN-LAST:event_sameAsButtonMouseClicked
 
