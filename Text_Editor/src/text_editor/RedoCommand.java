@@ -19,8 +19,7 @@ public class RedoCommand extends Command{
     }
     @Override
     public void execute(){
-         Memento memento = originator.careTaker.getNextState();
+        Memento memento = originator.careTaker.getNextState();
         originator.setMemento(memento);
-        
     }
 }

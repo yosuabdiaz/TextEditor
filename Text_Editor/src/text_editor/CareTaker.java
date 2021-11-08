@@ -16,13 +16,16 @@ import java.util.Queue;
 public class CareTaker {
     //ArrayList<Memento> memento = new ArrayList<>();
     Queue<Memento> memento = new LinkedList<Memento>();
-    int currentIndex;
+    int currentIndex = 0;
     
     void addMemento(Memento memento){
         if(currentIndex == 20){
             this.memento.remove();
             this.memento.add(memento);
             return;
+        }
+        while (this.memento.size() > currentIndex) {
+             this.memento.remove();
         }
         this.memento.add(memento);
         currentIndex++;
@@ -35,21 +38,22 @@ public class CareTaker {
     }
     
     Memento getNextState(){
-        if(currentIndex + 1 >= memento.size()){
+        if(currentIndex >= memento.size()){
             return null;
         }
+        Memento state = ((LinkedList<Memento>)memento).get(currentIndex);
         currentIndex++;
-        return ((LinkedList<Memento>)memento).get(currentIndex);
+        return state;
     }
     
     Memento getPreviousState(){
-        
-        if(currentIndex -2 < 0){
+        if(currentIndex-1 <= 0){
             return null;
         }
+        
         currentIndex--;
-        System.out.println(currentIndex -1);
-        return ((LinkedList<Memento>)memento).get(currentIndex -1);
+        Memento state =  ((LinkedList<Memento>)memento).get(currentIndex -1);
+        return state;
     }
     
 }

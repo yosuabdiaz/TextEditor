@@ -299,8 +299,12 @@ public class Interface extends javax.swing.JFrame {
     }//GEN-LAST:event_copyButtonMouseClicked
 
     private void pasteButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pasteButtonMouseClicked
+        originator.pauseListener();
         Command myCommand = new PasteCommand(this.JTextPane, Text, attributes);
         myCommand.execute();
+        
+        originator.createMemento();
+        //originator.resumeListener();
     }//GEN-LAST:event_pasteButtonMouseClicked
 
     private void colorButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_colorButtonActionPerformed

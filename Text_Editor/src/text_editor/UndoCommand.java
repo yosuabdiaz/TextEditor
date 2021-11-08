@@ -23,14 +23,8 @@ public class UndoCommand extends Command{
     @Override
     public void execute(){
         System.out.println("I'm undo");
-        
         Memento memento = originator.careTaker.getPreviousState();
         originator.setMemento(memento);
-        
-        /*myPane.getStyledDocument().removeDocumentListener(Interface.TextEditorListener);
-        myPane.setText(memento.state.getText());
-        myPane.addStyle(memento.state.getText(), memento.state.getStyle());
-        myPane. =.(Interface.TextEditorListener);*/
     }
 }
 

@@ -31,20 +31,22 @@ public class Originator {
     
     void setMemento(Memento memento){
         if(memento == null){return;}
-        state.removeDocumentListener(listener);
+        pauseListener();
         try {
             state.remove(0, state.getLength());
             //state.insertString(0, memento.getState().getText(), memento.getState().getStyle());
             String text = memento.getState().getText();
             ArrayList<AttributeSet> style = memento.getState().getStyle();
-            state.insertString(0, text, style.get(0));
+            if (style.size() > 0){
+                state.insertString(0, text, style.get(0));
+            }
             for (int i = 0; i< text.length(); i++){
                 state.setCharacterAttributes(i, 1, style.get(i), true);
             }
         } catch (BadLocationException ex) {
             Logger.getLogger(Originator.class.getName()).log(Level.SEVERE, null, ex);
         }
-        state.addDocumentListener(listener);
+        resumeListener();
         
     }
     
@@ -67,6 +69,14 @@ public class Originator {
         return memento;
     }
     
+    void pauseListener(){
+        state.removeDocumentListener(listener);
+    }
+    
+    void resumeListener(){
+        state.addDocumentListener(listener);
+    }
+   
     public class MementoListener implements DocumentListener{
     @Override
             public void insertUpdate(DocumentEvent e) {
