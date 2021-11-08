@@ -5,6 +5,8 @@
  */
 package text_editor;
 
+import java.util.ArrayList;
+import javax.swing.text.AttributeSet;
 import javax.swing.text.Style;
 import javax.swing.text.StyledDocument;
 
@@ -286,16 +288,18 @@ public class Interface extends javax.swing.JFrame {
         Command myCommand = new CutCommand(this.JTextPane);
         myCommand.execute();
         Text = myCommand.getText();
+        attributes = myCommand.getAtrributes();
     }//GEN-LAST:event_cutButtonMouseClicked
 
     private void copyButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_copyButtonMouseClicked
         Command myCommand = new CopyCommand(this.JTextPane);
         myCommand.execute();
         Text = myCommand.getText();
+        attributes = myCommand.getAtrributes();
     }//GEN-LAST:event_copyButtonMouseClicked
 
     private void pasteButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pasteButtonMouseClicked
-        Command myCommand = new PasteCommand(this.JTextPane, Text);
+        Command myCommand = new PasteCommand(this.JTextPane, Text, attributes);
         myCommand.execute();
     }//GEN-LAST:event_pasteButtonMouseClicked
 
@@ -345,6 +349,7 @@ public class Interface extends javax.swing.JFrame {
     StyledDocument doc;
     Style estilo;
     String Text="";
+    protected ArrayList<AttributeSet> attributes = new ArrayList<>();
     String name="";
     Originator originator;
     

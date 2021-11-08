@@ -5,7 +5,9 @@
  */
 package text_editor;
 
+import java.util.ArrayList;
 import javax.swing.JTextPane;
+import javax.swing.text.AttributeSet;
 import javax.swing.text.Style;
 import javax.swing.text.StyledDocument;
 
@@ -18,6 +20,7 @@ abstract class Command {
     protected StyledDocument doc;
     protected Style style;
     protected String text = "";
+    protected ArrayList<AttributeSet> attributes = new ArrayList<>();
     protected String name = "";
     Command(JTextPane Pane){
         myPane = Pane;
@@ -34,6 +37,14 @@ abstract class Command {
         this.doc = doc;
         this.style = style;
         this.name = name;
+    }
+
+    public ArrayList<AttributeSet> getAtrributes() {
+        return attributes;
+    }
+
+    public void setAtrributes(ArrayList<AttributeSet> atrributes) {
+        this.attributes = atrributes;
     }
     
     
