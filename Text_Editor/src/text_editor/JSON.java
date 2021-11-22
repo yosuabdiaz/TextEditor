@@ -29,7 +29,6 @@ public class JSON implements IFile {
         String message;
         String doc = "";
         JSONParser parser = new JSONParser();
-        System.out.println("OpenFile" + doc);
         try {
             Object obj = parser.parse(new FileReader(path));
             JSONObject jsonObject = (JSONObject) obj;
@@ -47,16 +46,13 @@ public class JSON implements IFile {
                 doc = doc + col.get(i);
                 doc = doc + ",";
             }
-            //System.out.println(doc);
         } catch (Exception e) {
             
         }
         message = doc;
-        System.out.println(message);
+       
         String[] textmesage = message.split("\nColor:");
-        for (String x : textmesage) {
-            System.out.println(x);
-        }
+        
         text = textmesage[0];
         textmesage = textmesage[1].split(",");
         int[] colors = new int[text.length()];
@@ -64,9 +60,7 @@ public class JSON implements IFile {
             int myNumber = Integer.parseInt(textmesage[i]);
             colors[i] = myNumber;
         }
-        for (int i = 0; i < textmesage.length; i++) {
-            System.out.println(colors);
-        }
+        
         StyledDocument x = StyledDocumentManager.getStyledDocument(text, colors);
         return x;
     }
@@ -96,8 +90,6 @@ public class JSON implements IFile {
         } catch (IOException e) {
 
         }
-
-        System.out.print(obj);
     }
 
 }
